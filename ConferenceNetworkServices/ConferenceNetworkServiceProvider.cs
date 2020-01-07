@@ -13,22 +13,9 @@ namespace ConferenceNetworkServices
 
         private HttpClient _httpClient = new HttpClient();
 
-        private static ConferenceNetworkServiceProvider _instance;
-
         private Dictionary<Type, object> _services = new Dictionary<Type, object>();
 
-        public ConferenceNetworkServiceProvider Instance 
-        { 
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new ConferenceNetworkServiceProvider();
-                }
-
-                return _instance;
-            }
-        }
+        public static ConferenceNetworkServiceProvider Instance { get; } = new ConferenceNetworkServiceProvider();
 
         private ConferenceNetworkServiceProvider()
         {

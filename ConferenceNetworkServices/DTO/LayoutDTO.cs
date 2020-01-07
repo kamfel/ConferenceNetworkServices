@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConferenceNetworkServices
+namespace ConferenceNetworkServices.DTO
 {
-    public class RoomService
+    public class LayoutDTO
     {
     }
 }

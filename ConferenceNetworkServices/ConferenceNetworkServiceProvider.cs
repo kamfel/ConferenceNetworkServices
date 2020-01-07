@@ -1,14 +1,64 @@
-﻿using System;
+﻿using ConferenceNetworkServices.Services;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Text;
 
 namespace ConferenceNetworkServices
 {
-    public class ConferenceNetworkServiceProvider : IServiceProvider
+    public class ConferenceNetworkServiceProvider
     {
-        public object GetService(Type serviceType)
+        private readonly object _lock = new object();
+
+        private HttpClient _httpClient = new HttpClient();
+
+        private static ConferenceNetworkServiceProvider _instance;
+
+        private Dictionary<Type, object> _services = new Dictionary<Type, object>();
+
+        public ConferenceNetworkServiceProvider Instance 
+        { 
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new ConferenceNetworkServiceProvider();
+                }
+
+                return _instance;
+            }
+        }
+
+        private ConferenceNetworkServiceProvider()
         {
-            throw new NotImplementedException();
+
+        }
+
+        public T Get<T>() where T : BaseService
+        {
+            if (String.IsNullOrEmpty(_httpClient.BaseAddress.ToString()))
+            {
+                throw new MemberAccessException("No server adress has been provided.");
+            }
+
+            var type = typeof(T);
+
+            lock (_lock)
+            {
+                if (!_services.ContainsKey(type))
+                {
+                    _services.Add(type, Activator.CreateInstance(type, new object[] { _httpClient }));
+                }
+            }
+            return _services[type] as T;
+        }
+
+        public ConferenceNetworkServiceProvider UseServerAPIAdress(string address)
+        {
+            _httpClient.BaseAddress = new Uri(address);
+
+            return this;
         }
     }
 }

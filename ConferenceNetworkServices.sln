@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceNetworkServices", "ConferenceNetworkServices\ConferenceNetworkServices.csproj", "{7FEC670F-2A50-4F68-B124-092EC11DFFB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConferenceNetworkServices.Test", "ConferenceNetworkServices.Test\ConferenceNetworkServices.Test.csproj", "{F229A237-C076-48B8-B675-BCF47046B6FA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{7FEC670F-2A50-4F68-B124-092EC11DFFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FEC670F-2A50-4F68-B124-092EC11DFFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FEC670F-2A50-4F68-B124-092EC11DFFB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F229A237-C076-48B8-B675-BCF47046B6FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F229A237-C076-48B8-B675-BCF47046B6FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F229A237-C076-48B8-B675-BCF47046B6FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F229A237-C076-48B8-B675-BCF47046B6FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -51,12 +51,12 @@ namespace ConferenceNetworkServices.Services
 
         public async Task<Tuple<HttpStatusCode, ICollection<TimeFrameDTO>>> GetAvailableTimeFrames(uint id, DateTime date)
         {
-            return await GetAsync<ICollection<TimeFrameDTO>>($"rooms/{id}?date=" + date.ToString("ddmmyyyy"));
+            return await GetAsync<ICollection<TimeFrameDTO>>($"rooms/{id}?date=" + date.ToString("ddMMyyyy"));
         }
 
         public async Task<Tuple<HttpStatusCode, ICollection<TimeFrameDTO>>> GetAvailableTimeFrames(uint id, DateTime startingDate, DateTime endingDate)
         {
-            return await GetAsync<ICollection<TimeFrameDTO>>($"rooms/{id}?start={startingDate.ToString("ddmmyyyy")}&end={endingDate.ToString("ddmmyyyy")}");
+            return await GetAsync<ICollection<TimeFrameDTO>>($"rooms/{id}?start={startingDate.ToString("ddMMyyyyhhmmss")}&end={endingDate.ToString("ddMMyyyyhhmmss")}");
         }
 
         public async Task<HttpStatusCode> CreateSegment(uint roomId, TimeFrameDTO timeFrame)
@@ -66,7 +66,7 @@ namespace ConferenceNetworkServices.Services
 
         public async Task<HttpStatusCode> RemoveSegmentsInRange(uint roomId, TimeFrameDTO timeFrame)
         {
-            return await DeleteAsync($"rooms/{roomId}/segments?start={timeFrame.Start.ToString()}&end={timeFrame.End.ToString()}");
+            return await DeleteAsync($"rooms/{roomId}/segments?start={timeFrame.Start.ToString("ddMMyyyyhhmmss")}&end={timeFrame.End.ToString("ddMMyyyyhhmmss")}");
         }
     }
 }

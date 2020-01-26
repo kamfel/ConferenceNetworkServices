@@ -51,7 +51,7 @@ namespace ConferenceNetworkServices.Services
 
         public async Task<Tuple<HttpStatusCode, ICollection<UserDTO>>> GetAllAsync()
         {
-            return await GetAsync<ICollection<UserInfoDTO>>("users");
+            return await GetAsync<ICollection<UserDTO>>("users");
         }
 
         public async Task<Tuple<HttpStatusCode, UserInfoDTO>> GetByIdAsync(uint id)

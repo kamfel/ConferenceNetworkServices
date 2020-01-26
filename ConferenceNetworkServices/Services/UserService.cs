@@ -16,14 +16,12 @@ namespace ConferenceNetworkServices.Services
         {
         }
 
-        public async Task<HttpStatusCode> LogOutAsync()
+        public void LogOut()
         {
-            var response = await _httpClient.PostAsync("logout", new StringContent(""));
-
-            return response.StatusCode;
+            _httpClient.DefaultRequestHeaders.Authorization = null;
         }
 
-        public async Task<HttpStatusCode> LogInAsync(UserDTO user)
+        public async Task<HttpStatusCode> LogInAsync(UserAuthDTO user)
         {
             var userJson = JsonConvert.SerializeObject(user);
             var content = new StringContent(userJson);
@@ -39,7 +37,7 @@ namespace ConferenceNetworkServices.Services
             return response.StatusCode;
         }
 
-        public async Task<Tuple<HttpStatusCode, string>> RegisterAsync(UserDTO user)
+        public async Task<Tuple<HttpStatusCode, string>> RegisterAsync(UserRegisterDTO user)
         {
             var userJson = JsonConvert.SerializeObject(user);
             var content = new StringContent(userJson);
@@ -51,7 +49,7 @@ namespace ConferenceNetworkServices.Services
             return new Tuple<HttpStatusCode, string>(response.StatusCode, body);
         }
 
-        public async Task<Tuple<HttpStatusCode, ICollection<UserInfoDTO>>> GetAllAsync()
+        public async Task<Tuple<HttpStatusCode, ICollection<UserDTO>>> GetAllAsync()
         {
             return await GetAsync<ICollection<UserInfoDTO>>("users");
         }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 
@@ -19,7 +20,9 @@ namespace ConferenceNetworkServices
 
         private ConferenceNetworkServiceProvider()
         {
-
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback +=
+                (sender, cert, chain, sslPolicyErrors) => { return true; };
         }
 
         public T Get<T>() where T : BaseService

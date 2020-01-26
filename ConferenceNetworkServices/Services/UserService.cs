@@ -26,6 +26,8 @@ namespace ConferenceNetworkServices.Services
             var userJson = JsonConvert.SerializeObject(user);
             var content = new StringContent(userJson);
 
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
             var response = await _httpClient.PostAsync("login", content);
 
             if (response.IsSuccessStatusCode)
@@ -41,6 +43,8 @@ namespace ConferenceNetworkServices.Services
         {
             var userJson = JsonConvert.SerializeObject(user);
             var content = new StringContent(userJson);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             var response = await _httpClient.PostAsync("register", content);
 

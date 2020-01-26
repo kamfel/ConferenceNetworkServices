@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,6 +40,8 @@ namespace ConferenceNetworkServices.Services
             var roomJson = JsonConvert.SerializeObject(obj);
             var content = new StringContent(roomJson);
 
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
             var response = await _httpClient.PostAsync(requestUri, content);
 
             return response.StatusCode;
@@ -47,6 +51,8 @@ namespace ConferenceNetworkServices.Services
         {
             var roomJson = JsonConvert.SerializeObject(obj);
             var content = new StringContent(roomJson);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             var response = await _httpClient.PutAsync(requestUri, content);
 

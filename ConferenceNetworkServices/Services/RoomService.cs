@@ -3,6 +3,7 @@ using ConferenceNetworkServices.SearchParameters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -59,6 +60,11 @@ namespace ConferenceNetworkServices.Services
             return await GetAsync<ICollection<TimeFrameDTO>>($"rooms/{id}?start={startingDate.ToString("ddMMyyyyhhmmss")}&end={endingDate.ToString("ddMMyyyyhhmmss")}");
         }
 
+        public async Task<Tuple<HttpStatusCode, ICollection<AvailabilityTimeFrameDTO>>> GetAllTimeFrames(int id, DateTime start, DateTime end)
+        {
+            return await GetAsync<ICollection<AvailabilityTimeFrameDTO>>($"rooms/{id}/segments?start={start.ToString("ddMMyyyyhhmmss")}&end={end.ToString("ddMMyyyyhhmmss")}");
+        }
+
         public async Task<HttpStatusCode> CreateSegment(int roomId, TimeFrameDTO timeFrame)
         {
             return await PostAsync($"rooms/{roomId}/segments", timeFrame);
@@ -67,6 +73,11 @@ namespace ConferenceNetworkServices.Services
         public async Task<HttpStatusCode> RemoveSegmentsInRange(int roomId, TimeFrameDTO timeFrame)
         {
             return await DeleteAsync($"rooms/{roomId}/segments?start={timeFrame.Start.ToString("ddMMyyyyhhmmss")}&end={timeFrame.End.ToString("ddMMyyyyhhmmss")}");
+        }
+
+        public async Task<Stream> GetAssetAsStream(int roomId)
+        {
+            return await _httpClient.GetStreamAsync($"rooms/{roomId}/asset");
         }
     }
 }

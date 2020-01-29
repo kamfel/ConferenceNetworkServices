@@ -75,9 +75,15 @@ namespace ConferenceNetworkServices.Services
             return await DeleteAsync($"rooms/{roomId}/segments?start={timeFrame.Start.ToString("ddMMyyyyhhmmss")}&end={timeFrame.End.ToString("ddMMyyyyhhmmss")}");
         }
 
-        public async Task<Stream> GetAssetAsStream(int roomId)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roomId"></param>
+        /// <param name="platform">1 - windows, 2 - android</param>
+        /// <returns></returns>
+        public async Task<Stream> GetAssetAsStream(int roomId, int platform)
         {
-            return await _httpClient.GetStreamAsync($"rooms/{roomId}/asset");
+            return await _httpClient.GetStreamAsync($"rooms/{roomId}/assets/{platform}");
         }
     }
 }

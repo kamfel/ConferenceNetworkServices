@@ -58,12 +58,12 @@ namespace ConferenceNetworkServices.Services
             return await GetAsync<ICollection<UserDTO>>("users");
         }
 
-        public async Task<Tuple<HttpStatusCode, UserInfoDTO>> GetByIdAsync(uint id)
+        public async Task<Tuple<HttpStatusCode, UserInfoDTO>> GetByIdAsync(int id)
         {
             return await GetAsync<UserInfoDTO>($"users/{id}");
         }
 
-        public async Task<HttpStatusCode> RemoveAsync(uint id)
+        public async Task<HttpStatusCode> RemoveAsync(int id)
         {
             return await DeleteAsync($"users/{id}");
         }

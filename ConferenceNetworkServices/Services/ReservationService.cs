@@ -24,22 +24,22 @@ namespace ConferenceNetworkServices.Services
             return await GetAsync<ICollection<ReservationDTO>>("reservations");
         }
 
-        public async Task<Tuple<HttpStatusCode, ReservationDTO>> GetByIdAsync(uint id)
+        public async Task<Tuple<HttpStatusCode, ReservationDTO>> GetByIdAsync(int id)
         {
             return await GetAsync<ReservationDTO>($"reservations/{id}");
         }
 
-        public async Task<Tuple<HttpStatusCode, ICollection<ReservationDTO>>> GetAllForUserAsync(uint userId)
+        public async Task<Tuple<HttpStatusCode, ICollection<ReservationDTO>>> GetAllForUserAsync(int userId)
         {
             return await GetAsync<ICollection<ReservationDTO>>($"users/{userId}/reservations");
         }
 
-        public async Task<HttpStatusCode> UpdateAsync(uint id, ReservationDTO reservation)
+        public async Task<HttpStatusCode> UpdateAsync(int id, ReservationDTO reservation)
         {
             return await PutAsync($"reservations/{id}", reservation);
         }
 
-        public async Task<HttpStatusCode> RemoveAsync(uint id)
+        public async Task<HttpStatusCode> RemoveAsync(int id)
         {
             return await DeleteAsync($"reservations/{id}");
         }

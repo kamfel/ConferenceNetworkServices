@@ -23,12 +23,12 @@ namespace ConferenceNetworkServices.Services
             return await PostAsync("layouts", layout);
         }
 
-        public async Task<HttpStatusCode> UpdateAsync(uint id, LayoutDTO layout)
+        public async Task<HttpStatusCode> UpdateAsync(int id, LayoutDTO layout)
         {
             return await PutAsync($"layouts/{id}", layout);
         }
 
-        public async Task<HttpStatusCode> DeleteAsync(uint id)
+        public async Task<HttpStatusCode> DeleteAsync(int id)
         {
             return await DeleteAsync($"layouts/{id}");
         }

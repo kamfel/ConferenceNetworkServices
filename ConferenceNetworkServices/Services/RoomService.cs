@@ -27,17 +27,17 @@ namespace ConferenceNetworkServices.Services
             return await PostAsync("rooms", room);
         }
 
-        public async Task<Tuple<HttpStatusCode, RoomDetailsDTO>> GetByIdAsync(uint id)
+        public async Task<Tuple<HttpStatusCode, RoomDetailsDTO>> GetByIdAsync(int id)
         {
             return await GetAsync<RoomDetailsDTO>($"rooms/{id}");
         }
 
-        public async Task<HttpStatusCode> UpdateAsync(uint id, RoomDetailsDTO room)
+        public async Task<HttpStatusCode> UpdateAsync(int id, RoomDetailsDTO room)
         {
             return await PutAsync($"rooms/{id}", room);
         }
 
-        public async Task<HttpStatusCode> RemoveAsync(uint id)
+        public async Task<HttpStatusCode> RemoveAsync(int id)
         {
             return await DeleteAsync($"rooms/{id}");
         }
@@ -49,22 +49,22 @@ namespace ConferenceNetworkServices.Services
             return await GetAsync<ICollection<RoomDTO>>("rooms?" + queryString);
         }
 
-        public async Task<Tuple<HttpStatusCode, ICollection<TimeFrameDTO>>> GetAvailableTimeFrames(uint id, DateTime date)
+        public async Task<Tuple<HttpStatusCode, ICollection<TimeFrameDTO>>> GetAvailableTimeFrames(int id, DateTime date)
         {
             return await GetAsync<ICollection<TimeFrameDTO>>($"rooms/{id}?date=" + date.ToString("ddMMyyyy"));
         }
 
-        public async Task<Tuple<HttpStatusCode, ICollection<TimeFrameDTO>>> GetAvailableTimeFrames(uint id, DateTime startingDate, DateTime endingDate)
+        public async Task<Tuple<HttpStatusCode, ICollection<TimeFrameDTO>>> GetAvailableTimeFrames(int id, DateTime startingDate, DateTime endingDate)
         {
             return await GetAsync<ICollection<TimeFrameDTO>>($"rooms/{id}?start={startingDate.ToString("ddMMyyyyhhmmss")}&end={endingDate.ToString("ddMMyyyyhhmmss")}");
         }
 
-        public async Task<HttpStatusCode> CreateSegment(uint roomId, TimeFrameDTO timeFrame)
+        public async Task<HttpStatusCode> CreateSegment(int roomId, TimeFrameDTO timeFrame)
         {
             return await PostAsync($"rooms/{roomId}/segments", timeFrame);
         }
 
-        public async Task<HttpStatusCode> RemoveSegmentsInRange(uint roomId, TimeFrameDTO timeFrame)
+        public async Task<HttpStatusCode> RemoveSegmentsInRange(int roomId, TimeFrameDTO timeFrame)
         {
             return await DeleteAsync($"rooms/{roomId}/segments?start={timeFrame.Start.ToString("ddMMyyyyhhmmss")}&end={timeFrame.End.ToString("ddMMyyyyhhmmss")}");
         }
